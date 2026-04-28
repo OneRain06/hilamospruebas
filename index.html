@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
+
 /* ================= RESET ===================================================================================== */
 :root{
   --gris:#687e8a;
@@ -1138,20 +1139,19 @@ color:var(--morado1);
 
 .clientes-pro h2{
   font-size:36px;
-color:var(--morado);
+  color:var(--morado);
   margin-bottom:50px;
 }
 
-/* ================= ROW ================= */
-
-.clientes-row{
+/* ================= WRAPPER ================= */
+.clientes-wrapper{
   position:relative;
-  overflow:hidden;
+  overflow:hidden; /* mantiene degradados y evita que se vean fuera */
 }
 
-/* 🔥 DEGRADADOS LATERALES (CLAVE) */
-.clientes-row::before,
-.clientes-row::after{
+/* 🔥 DEGRADADOS LATERALES */
+.clientes-wrapper::before,
+.clientes-wrapper::after{
   content:"";
   position:absolute;
   top:0;
@@ -1161,20 +1161,23 @@ color:var(--morado);
   pointer-events:none;
 }
 
-/* izquierda */
-.clientes-row::before{
+.clientes-wrapper::before{
   left:0;
   background:linear-gradient(to right,var(--blanco),transparent);
 }
 
-/* derecha */
-.clientes-row::after{
+.clientes-wrapper::after{
   right:0;
   background:linear-gradient(to left,var(--blanco),transparent);
 }
 
-/* ================= TRACK ================= */
+/* ================= ROW ================= */
+.clientes-row{
+  position:relative;
+  overflow:hidden; /* mantiene el recorte lateral */
+}
 
+/* ================= TRACK ================= */
 .clientes-track{
   display:flex;
   gap:80px;
@@ -1183,13 +1186,14 @@ color:var(--morado);
 }
 
 /* ================= LOGOS ================= */
-
 .clientes-track img{
   height:55px;
   object-fit:contain;
   filter:grayscale(100%);
   opacity:0.6;
   transition:.4s;
+  padding:10px; /* espacio invisible para que al crecer no se corte */
+  box-sizing:content-box; /* asegura que el padding no reduzca la imagen */
 }
 
 /* hover elegante */
@@ -1200,24 +1204,21 @@ color:var(--morado);
 }
 
 /* ================= LOOP ================= */
-
 @keyframes clientesLoop{
   from{ transform:translateX(0); }
   to{ transform:translateX(-50%); }
 }
 
 /* ================= MOBILE ================= */
-
 @media(max-width:768px){
 
   .clientes-pro{
     padding:60px 20px;
-	  
   }
 
   .clientes-pro h2{
     font-size:26px;
-	  color:var(--morado);
+    color:var(--morado);
   }
 
   .clientes-track{
@@ -1226,9 +1227,11 @@ color:var(--morado);
 
   .clientes-track img{
     height:40px;
+    padding:8px; /* también espacio en móvil */
   }
 
 }
+
 	
 	/*================= contactos =====================================================================================*/
 	
@@ -1828,8 +1831,10 @@ color:var(--morado);
 
   <h2>Empresas que confían en nosotros</h2>
 
+<div class="clientes-wrapper">
   <div class="clientes-row">
     <div class="clientes-track">
+
 
       <img src="cliente1.png">
       <img src="cliente2.png">
@@ -1865,6 +1870,7 @@ color:var(--morado);
       <img src="cliente15.png">
 
     </div>
+  </div>
   </div>
 
 </section>
